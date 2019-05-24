@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+"
+>
+
+	<!-- scope:singleton -->
+	<bean id="person" class="com.wzy.springframework.ioc.beans.Person" name="person_bak,a">
+		<!-- collaborators and configuration for this bean go here -->
+		<property name="name" value="test"/>
+	</bean>
+	<alias name="person" alias="b_person"/>
+
+	<!-- more bean definitions go here -->
+
+	<bean id="getBeanTest" class="com.wzy.springframework.lookup.GetBeanTest">
+		<lookup-method name="getBean" bean="teacher"/>
+	</bean>
+	<bean id="teacher" class="com.wzy.springframework.lookup.Teacher"></bean>
+
+<!--	<myname:user id="testbean" userName="aaa" email="bbb"/>-->
+<!--	<ch:dateformat id="dateFormat" pattern="yyyy-MM-dd HH:mm" lenient="true"/>-->
+
+	<!-- 自定义FactoryBean -->
+	<bean id="car" class="com.wzy.springframework.factorybean.CarFactoryBean" />
+
+	<!-- 属性注册编辑器 -->
+	<bean id="userManager" class="com.wzy.springframework.editor.UserManager">
+		<property name="date">
+			<value>2019-05-13</value>
+		</property>
+	</bean>
+<!--	<bean id = "datePropertyEditor" class="com.wzy.springframework.editor.DatePropertyEditor">-->
+<!--		<property name="format">-->
+<!--			<value>MM-dd</value>-->
+<!--		</property>-->
+<!--	</bean>-->
+<!--	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+<!--		<property name="customEditors">-->
+<!--			<map>-->
+<!--				<entry key="java.util.Date" value="com.wzy.springframework.editor.DatePropertyEditor">-->
+<!--&lt;!&ndash;					<bean class="com.wzy.springframework.editor.DatePropertyEditor">&ndash;&gt;-->
+<!--&lt;!&ndash;						<property name="format">&ndash;&gt;-->
+<!--&lt;!&ndash;							<value>yyyy-MM-dd</value>&ndash;&gt;-->
+<!--&lt;!&ndash;						</property>&ndash;&gt;-->
+<!--&lt;!&ndash;					</bean>&ndash;&gt;-->
+<!--				</entry>-->
+<!--			</map>-->
+<!--		</property>-->
+<!--	</bean>-->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="propertyEditorRegistrars">
+			<list>
+				<bean class="com.wzy.springframework.editor.DatePropertyEditorRegistrar"></bean>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- postProcessor -->
+	<bean id="bfpp" class="com.wzy.springframework.postprocessor.ObscenityRemovingBeanFactoryPostProcessor">
+		<property name="obscenties">
+			<set>
+				<value>bollocks</value>
+				<value>winky</value>
+				<value>bum</value>
+				<value>Microsoft</value>
+			</set>
+		</property>
+	</bean>
+	<bean id="simpleBean" class="com.wzy.springframework.postprocessor.SimplePostProcessor">
+		<property name="connectionString" value="bollocks"/>
+		<property name="username" value="imaginecup"/>
+		<property name="password" value="Microsoft"/>
+	</bean>
+
+</beans>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--	   xmlns:ch="http://www.huhx.com/schema/ch"-->
+<!--	   xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+<!--        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd-->
+<!--        http://www.huhx.com/schema/ch-->
+<!--        http://www.huhx.com/schema/ch.xsd">-->
+<!--	<ch:dateformat id="dateFormat" pattern="yyyy-MM-dd HH:mm" lenient="true"/>-->
+<!--</beans>-->
+

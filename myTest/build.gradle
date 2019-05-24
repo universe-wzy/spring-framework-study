@@ -1,0 +1,25 @@
+description = "myTest"
+
+group 'org.springframework'
+version '5.1.7.BUILD-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(project(":spring-beans"))
+    compile(project(":spring-core"))
+    optional(project(":spring-aop"))
+    optional(project(":spring-jdbc"))
+    optional(project(":spring-aspects"))
+    optional(project(":spring-context"))
+    optional(project(":spring-context-support"))
+    optional(project(":spring-oxm"))
+    optional(project(":spring-web"))
+    optional(project(":spring-webmvc"))
+    optional("commons-dbcp:commons-dbcp:1.4")
+    optional("mysql:mysql-connector-java:8.0.16")
+}
