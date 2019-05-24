@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * 描述:
  * 学习applicationContext源码
+ * 测试推送是否ok
  *
  * @author wangzhenyu
  * @create 2019-04-25 16:28
